@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { CharacterModule } from './character/character.module';
 import { ProvidersModule } from './providers/providers.module';
-import { LocationModule } from './location/location.module';
-import { EpisodeModule } from './episode/episode.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CharacterService } from './character/character.service';
+import { UsersModule } from './users/users.module';
+import { MoviesModule } from './movies/movies.module';
+import { SeriesModule } from './series/series.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -19,10 +19,14 @@ import { CharacterService } from './character/character.service';
     retryDelay: 3000,
     retryAttempts: 5
   }),
-  CharacterModule,
+  ConfigModule.forRoot({
+    envFilePath: ".dev.env",
+    isGlobal: true
+  }),
   ProvidersModule, 
-  LocationModule, 
-  EpisodeModule
+  UsersModule, 
+  MoviesModule, 
+  SeriesModule
 ],
   controllers: [],
   providers: [],

@@ -1,68 +1,32 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class ProvidersService {
-    constructor(private readonly httpService: HttpService) { }
-    async getAllChars(page: number) {
+    constructor(
+        private readonly httpService: HttpService,
+        private readonly configService: ConfigService
+    ) { }
+    async getByName(name: string, type: string){
         try{
+            const apikey = this.configService.get("API_KEY");
             const response = await firstValueFrom(
-                this.httpService.get("https://rickandmortyapi.com/api/character?page="+page)
-            );
-            return response.data.results;
+                this.httpService.get(`https://www.omdbapi.com/?s=${name}&apikey=${apikey}&type=${type}`)
+            )
+            return response.data;
         }catch(e){
             throw new Error("Something went wrong");
         }
     }
-    async getPagesChars() {
+    async getByImdbID(imdbID: string, type: string){
         try{
+            const apikey = this.configService.get("API_KEY");
             const response = await firstValueFrom(
-                this.httpService.get("https://rickandmortyapi.com/api/character")
-            );
-            return response.data.info.pages;
-        }catch(e){
-            throw new Error("Something went wrong");
-        }
-    }
-
-    async getAllLocations(page: number) {
-        try{
-            const response = await firstValueFrom(
-                this.httpService.get("https://rickandmortyapi.com/api/location?page="+page)
-            );
-            return response.data.results;
-        }catch(e){
-            throw new Error("Something went wrong");
-        }
-    }
-    async getPagesLocations() {
-        try{
-            const response = await firstValueFrom(
-                this.httpService.get("https://rickandmortyapi.com/api/location")
-            );
-            return response.data.info.pages;
-        }catch(e){
-            throw new Error("Something went wrong");
-        }
-    }
-
-    async getAllEpisodes(page: number) {
-        try{
-            const response = await firstValueFrom(
-                this.httpService.get("https://rickandmortyapi.com/api/episode?page="+page)
-            );
-            return response.data.results;
-        }catch(e){
-            throw new Error("Something went wrong");
-        }
-    }
-    async getPagesEpisodes() {
-        try{
-            const response = await firstValueFrom(
-                this.httpService.get("https://rickandmortyapi.com/api/episode")
-            );
-            return response.data.info.pages;
+                this.httpService.get(`https://www.omdbapi.com/?i=${imdbID}&apikey=${apikey}&type=${type}`)
+            )
+            return response.data;
         }catch(e){
             throw new Error("Something went wrong");
         }
