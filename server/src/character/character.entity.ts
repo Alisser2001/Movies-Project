@@ -28,10 +28,10 @@ export class Character {
     @Column({length: 100, nullable: true})
     img: string;
 
-    @ManyToOne(()=> Location, (location)=> location.residents)
-    location: Location
+    @ManyToOne(()=> Location, (location)=> location.residents, { nullable: true })
+    location: Location | string;
 
-    @ManyToMany(()=> Episode)
+    @ManyToMany(()=> Episode, (episode)=> episode.characters)
     @JoinTable()
-    episodes: Episode[]
+    episodes: Episode[];
 }

@@ -20,7 +20,11 @@ export class EpisodeService {
         for(let i=0; i<ep.length; i++){
             await this.createEpisode(ep[i])
         }
-        return this.epRepo.find();
+        return this.epRepo.find({
+            relations: {
+                characters: true
+            }
+        });
     }
 
     private async createEpisode(body: Episodes){

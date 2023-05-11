@@ -20,12 +20,16 @@ export class LocationService {
         for(let i=0; i<loc.length; i++){
             await this.createLocation(loc[i])
         }
-        return this.locRepo.find();
+        return this.locRepo.find({
+            relations: {
+                residents: true
+            }
+        });
     }
 
     private async createLocation(body: Locations){
         try{
-            const newLoc = await this.locRepo.create({
+            const newLoc = this.locRepo.create({
                 id: body.id,
                 name: body.name,
                 type: body.type,

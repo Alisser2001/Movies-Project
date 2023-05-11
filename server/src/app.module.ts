@@ -4,6 +4,7 @@ import { ProvidersModule } from './providers/providers.module';
 import { LocationModule } from './location/location.module';
 import { EpisodeModule } from './episode/episode.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CharacterService } from './character/character.service';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -18,7 +19,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     retryDelay: 3000,
     retryAttempts: 5
   }),
-  CharacterModule, 
+  CharacterModule,
   ProvidersModule, 
   LocationModule, 
   EpisodeModule
