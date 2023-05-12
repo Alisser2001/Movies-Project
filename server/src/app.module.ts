@@ -13,7 +13,7 @@ import { ConfigModule } from '@nestjs/config';
     port: 5432,
     username: 'postgres',
     password: '321724AAa',
-    database: 'rymdb',
+    database: 'movies',
     entities: ['dist/**/*.entity{.ts,.js}'],
     synchronize: true,
     retryDelay: 3000,
