@@ -1,0 +1,46 @@
+.navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100vw;
+    height: 16vh;
+    background-color: transparent;
+}
+
+.logo{
+    all: unset;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 8vw;
+    height: 15vh;
+    margin: 1vh 0 0 1vw;
+    background-image: url("belgian-g807cf7783_1280.png");
+    background-size: 8vw 15vh;
+}
+
+.title{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 15vw;
+    height: 15vh;
+    margin: 1vh 54vw 0 2vw;
+    font-weight: 700;
+    font-size: 3em;
+}
+
+.loginButton{
+    width: 10vw;
+    height: 6vh;
+    margin: 5vh 5vw;
+    background-color: rgb(190,19,29);
+    border-radius: 4px;
+    border-style: none;
+    font-family: Raleway;
+    font-size: 1em;
+    cursor: pointer;
+}
