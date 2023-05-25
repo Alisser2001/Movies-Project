@@ -29,15 +29,59 @@
     text-align: center;
     width: 15vw;
     height: 15vh;
-    margin: 1vh 54vw 0 2vw;
+    margin: 1vh 34vw 0 2vw;
     font-weight: 700;
     font-size: 3em;
+}
+
+.search{
+    width: 22vw;
+    height: 6vh;
+    display: flex;
+    flex-direction: row;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border: none;
+    margin: 5vh 2vw;
+}
+
+.inputField{
+    width: 10vw;
+    margin: 0 0 0 8vw;
+    border: none;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 0 0 0 1vw;
+    transition-duration: 0.5s;
+}
+
+.inputSubmit{
+    width: 4vw;
+    border: none;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    background-color: rgba(255, 255, 255, 0.9);
+    background-image: url("../../public/search.png");
+    background-size: 2vw 4vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(100%);
+    cursor: pointer;
+}
+
+.inputField:focus{
+    outline: none;
+    margin: 0;
+    width: 18vw;
 }
 
 .loginButton{
     width: 10vw;
     height: 6vh;
-    margin: 5vh 5vw;
+    margin: 5vh 2vw;
     background-color: rgba(190,19,29,0.9);
     border-radius: 4px;
     border-style: none;

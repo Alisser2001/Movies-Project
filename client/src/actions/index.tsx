@@ -37,6 +37,34 @@ export function getMovieByName(name: string): ThunkAction<Promise<void>, any, an
     }
 }
 
+export function getAllMovies(): ThunkAction<Promise<void>, any, any, AnyAction> {
+    return async (dispatch: Dispatch) => {
+        try{
+            let json = await axios.get("http://localhost:3000/movies/all");
+            dispatch({
+                type: "GET_ALL_MOVIES",
+                payload: json.data
+            })
+        }catch(e) {
+            throw new Error("Error")
+        }
+    }
+}
+
+export function getMoviesByGenres(genres: string): ThunkAction<Promise<void>, any, any, AnyAction> {
+    return async (dispatch: Dispatch) => {
+        try{
+            let json = await axios.get("http://localhost:3000/movies/genres?g="+genres);
+            dispatch({
+                type: "GET_MOVIES_BY_GENRE",
+                payload: json.data
+            })
+        }catch(e){
+            throw new Error("Error")
+        }
+    }
+}
+
 export function LogInUser(data: any): ThunkAction<Promise<void>, any, any, AnyAction> {
     return async (dispatch: Dispatch) => {
         try {

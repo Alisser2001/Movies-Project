@@ -35,6 +35,14 @@ export class MoviesService {
         return await this.movieRepo.find();
     }
 
+    async getMoviesByGenre(genres: string[]){
+        let allMovies = [];
+        for(let i=0; i<genres.length; i++){
+            allMovies = allMovies.concat((await this.movieRepo.find()).filter((movie) => movie.genre.toLowerCase().includes(genres[i].toLowerCase())));
+        }
+        return allMovies;
+    }
+
     async createMovie(body: Movie) {
         try {
             const newMovie = this.movieRepo.create();

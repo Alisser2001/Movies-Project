@@ -1,11 +1,13 @@
 import { Reducer } from 'redux';
 
 interface AppState {
-    movies: []
+    movies: [],
+    relatedMovies: []
 }
 
 const initialState: AppState = {
-    movies: []
+    movies: [],
+    relatedMovies: []
 }
 
 const rootReducer: Reducer<AppState, any> = (state = initialState, action: any) => {
@@ -14,6 +16,16 @@ const rootReducer: Reducer<AppState, any> = (state = initialState, action: any) 
             return{
                 ...state,
                 movies: action.payload 
+            }
+        case "GET_ALL_MOVIES":
+            return{
+                ...state,
+                movies: action.payload
+            }
+        case "GET_MOVIES_BY_GENRE":
+            return{
+                ...state,
+                relatedMovies: action.payload
             }
         default:
             return state
