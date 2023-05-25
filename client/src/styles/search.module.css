@@ -13,6 +13,7 @@
     flex-direction: row;
     width: 20vw;
     height: 60vh;
+    margin: 10vh 0 10vh 0;
 }
 
 .img{
@@ -29,12 +30,12 @@
     align-items: flex-start;
     width: 40vw;
     height: 60vh;
-    margin: 0 0 0 5vw;
+    margin: 10vh 0 10vh 5vw;
 }
 
 .title {
     width: 40vw;
-    height: 5vh;
+    height: 10vh;
     margin: 0 0 3vh 0;
     display: flex;
     flex-direction: row;
@@ -45,7 +46,7 @@
 
 .description{
     width: 40vw;
-    height: 10vh;
+    height: 15vh;
     margin: 0;
     display: flex;
     flex-direction: row;
@@ -55,7 +56,7 @@
 
 .h3Data{
     color: white;
-    margin: 0 0 5vh 0;
+    margin: 0 0 3vh 0;
 }
 
 .h4Data{
@@ -68,14 +69,49 @@
 }
 
 .relatedMovies{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100vw;
 }
 
-.relatedMovies>ul{
+.relatedTitle{
+    width: 60vw;
+    height: 10vh;
+    font-size: 3em;
+    margin: 0 0 10vh 0;
+}
+
+.moviesList{
+    width: 100vw;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.movie{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 5vh 2vw;
+    width: 15vw;
+    height: 40vh;
+    cursor: pointer;
+}
+
+.moviePoster{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15vw;
+    max-width: 15vw;
+    height: 40vh;
+    max-height: 40vh;
 }

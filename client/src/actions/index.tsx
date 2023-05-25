@@ -37,6 +37,20 @@ export function getMovieByName(name: string): ThunkAction<Promise<void>, any, an
     }
 }
 
+export function getMovieByImdbid(imdbid: string): ThunkAction<Promise<void>, any, any, AnyAction> {
+    return async (dispatch: Dispatch) => {
+        try{
+            let json = await axios.get("http://localhost:3000/movies/movie/" + imdbid);
+            dispatch({
+                type: "GET_MOVIE_BY_IMDBID",
+                payload: json.data
+            })
+        }catch(e: any){
+            throw new Error("Error")
+        }
+    }
+}
+
 export function getAllMovies(): ThunkAction<Promise<void>, any, any, AnyAction> {
     return async (dispatch: Dispatch) => {
         try{

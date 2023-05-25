@@ -27,6 +27,11 @@ const rootReducer: Reducer<AppState, any> = (state = initialState, action: any) 
                 ...state,
                 relatedMovies: action.payload
             }
+        case "GET_MOVIE_BY_IMDBID":
+            return{
+                ...state,
+                movies: action.payload
+            }
         default:
             return state
     }

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "../styles/search.module.css"
 import { useEffect } from "react";
-import { getMoviesByGenres } from "../actions";
+import { getMoviesByGenres, getMovieByImdbid } from "../actions";
 
 export default function Search() {
     const dispatch = useDispatch();
@@ -10,6 +10,9 @@ export default function Search() {
         dispatch(getMoviesByGenres(movie.genre) as any);
     }, [])
     const relatedMovies = useSelector((state: any) => state.relatedMovies);
+    const handleSearchImdbid = (imdbid: string) => {
+        dispatch(getMovieByImdbid(imdbid) as any);
+    }
     return (
         <div className={styles.searchCont}>
             <section className={styles.poster}>
@@ -28,16 +31,16 @@ export default function Search() {
                 <h4 className={styles.h4Data}>Rated: <a>{movie ? movie.rated : "N/A"}</a></h4>
             </section>
             <section className={styles.relatedMovies}>
-                <h1>Peliculas Relacionadas</h1>
-                <ul>
+                <h1 className={styles.relatedTitle}>Peliculas Relacionadas</h1>
+                <ul className={styles.moviesList}>
                 {relatedMovies.map((movie: any, count: number) => {
-                        if (count<50) {
+                        if (count<50 && movie.poster !== "N/A") {
                             return (
-                                <li>
-                                    {movie.poster !== "N/A" && <img src={movie.poster} />}
-                                    {movie.poster !== "N/A" && <p>
+                                <li className={styles.movie} key={movie.imdbid} onClick={()=>handleSearchImdbid(movie.imdbid)}>
+                                    <img src={movie.poster} className={styles.moviePoster}/>
+                                    <p>
                                         {movie.title}
-                                    </p>}
+                                    </p>
                                 </li>
                             )
                         }

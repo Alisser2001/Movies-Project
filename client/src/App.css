@@ -15,3 +15,27 @@
   overflow-x: hidden;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
 }
+
+.app::-webkit-scrollbar {
+  background-color: transparent;
+}
+
+.app::-webkit-scrollbar:vertical {
+  width: 1vw;
+}
+
+.app::-webkit-scrollbar-button:increment,
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+.app::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+
+.app::-webkit-scrollbar-thumb {
+  background-color: rgba(190,19,29, 1);
+  border-radius: 20px;
+  border: 2px solid rgba(0, 0, 0, .2);
+  margin: 1vw;
+}
