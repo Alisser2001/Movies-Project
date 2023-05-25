@@ -9,25 +9,25 @@ export class ProvidersService {
         private readonly httpService: HttpService,
         private readonly configService: ConfigService
     ) { }
-    async getByName(name: string, type: string){
-        try{
+    async getByName(name: string, type: string) {
+        try {
             const apikey = this.configService.get("API_KEY");
             const response = await firstValueFrom(
                 this.httpService.get(`https://www.omdbapi.com/?s=${name}&apikey=${apikey}&type=${type}`)
             )
             return response.data;
-        }catch(e){
+        } catch (e) {
             throw new Error("Something went wrong");
         }
     }
-    async getByImdbID(imdbID: string, type: string){
-        try{
+    async getByImdbID(imdbID: string, type: string) {
+        try {
             const apikey = this.configService.get("API_KEY");
             const response = await firstValueFrom(
                 this.httpService.get(`https://www.omdbapi.com/?i=${imdbID}&apikey=${apikey}&type=${type}`)
             )
             return response.data;
-        }catch(e){
+        } catch (e) {
             throw new Error("Something went wrong");
         }
     }

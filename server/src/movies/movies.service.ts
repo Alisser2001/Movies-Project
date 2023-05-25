@@ -21,7 +21,7 @@ export class MoviesService {
             const res = await this.providerService.getByImdbID(result[i].imdbID, "movie");
             await this.createMovie(res);
         }
-        return (await this.movieRepo.find()).filter((movie) => movie.title.includes(name));
+        return (await this.movieRepo.find()).filter((movie) => movie.title.toLowerCase().includes(name.toLowerCase()));
     }
 
     async getMovieByImdbId(imdbID: string) {

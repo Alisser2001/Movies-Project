@@ -26,10 +26,13 @@
     "@nestjs/core": "^9.4.0",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/typeorm": "^9.0.1",
+    "@types/sendgrid": "^4.3.0",
     "axios": "^1.4.0",
+    "firebase": "^9.22.0",
     "pg": "^8.10.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
+    "sendgrid": "^5.2.3",
     "typeorm": "^0.3.15"
   },
   "devDependencies": {

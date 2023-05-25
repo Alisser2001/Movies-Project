@@ -13,9 +13,15 @@ export class Users {
     name: string;
 
     @Column()
-    email: string;
+    lastname: string;
 
     @Column()
+    username: string;
+
+    @Column()
+    email: string;
+
+    @Column({nullable: true})
     ratings: string;
 
     @ManyToMany(()=> Movies, (movie)=> movie.fans)
@@ -26,6 +32,6 @@ export class Users {
     @JoinTable()
     favoritesseries: Series[];
 
-    @Column({ type: 'jsonb' })
+    @Column({ type: 'jsonb', nullable: true })
     comments: Comments[];
 }
