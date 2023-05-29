@@ -21,43 +21,51 @@ export class SeriesService {
             const res = await this.providerService.getByImdbID(result[i].imdbID, "series");
             await this.createSerie(res);
         }
-        return (await this.serieRepo.find()).filter((serie)=>serie.title.includes(name));
+        return (await this.serieRepo.find()).filter((serie) => serie.title.toLowerCase().includes(name.toLowerCase()));
     }
 
-    async getSerieByImdbId(imdbID: string){
+    async getSeriesByGenre(genres: string[]) {
+        let allSeries = [];
+        for (let i = 0; i < genres.length; i++) {
+            allSeries = allSeries.concat((await this.serieRepo.find()).filter((serie) => serie.genre.toLowerCase().includes(genres[i].toLowerCase())));
+        }
+        return allSeries;
+    }
+
+    async getSerieByImdbId(imdbID: string) {
         const res = await this.providerService.getByImdbID(imdbID, "series");
         const result = res;
         await this.createSerie(result);
-        return (await this.serieRepo.find()).filter((serie)=>serie.imdbid===imdbID);
+        return (await this.serieRepo.find()).filter((serie) => serie.imdbid === imdbID);
     }
 
-    async getAllSeries(){
+    async getAllSeries() {
         return this.serieRepo.find();
     }
 
-    async createSerie(body: Serie){
+    async createSerie(body: Serie) {
         try {
             const newSerie = this.serieRepo.create();
             newSerie.imdbid = body.imdbID;
-            newSerie.title= body.Title;
-            newSerie.year= body.Year;
-            newSerie.rated= body.Rated;
-            newSerie.released= body.Released;
-            newSerie.runtime= body.Runtime;
-            newSerie.genre= body.Genre;
-            newSerie.director= body.Director;
-            newSerie.writer= body.Writer;
-            newSerie.actors= body.Actors;
-            newSerie.plot= body.Plot;
-            newSerie.language= body.Language;
-            newSerie.country= body.Country;
-            newSerie.awards= body.Awards;
-            newSerie.poster= body.Poster;
-            newSerie.ratings= body.Ratings;
-            newSerie.metascore= body.Metascore;
-            newSerie.imdbrating= body.imdbRating;
-            newSerie.imdbvotes= body.imdbVotes;
-            newSerie.seasons= body.totalSeasons;
+            newSerie.title = body.Title;
+            newSerie.year = body.Year;
+            newSerie.rated = body.Rated;
+            newSerie.released = body.Released;
+            newSerie.runtime = body.Runtime;
+            newSerie.genre = body.Genre;
+            newSerie.director = body.Director;
+            newSerie.writer = body.Writer;
+            newSerie.actors = body.Actors;
+            newSerie.plot = body.Plot;
+            newSerie.language = body.Language;
+            newSerie.country = body.Country;
+            newSerie.awards = body.Awards;
+            newSerie.poster = body.Poster;
+            newSerie.ratings = body.Ratings;
+            newSerie.metascore = body.Metascore;
+            newSerie.imdbrating = body.imdbRating;
+            newSerie.imdbvotes = body.imdbVotes;
+            newSerie.seasons = body.totalSeasons;
             return await this.serieRepo.save(newSerie);
         } catch (e) {
             throw new Error(e);

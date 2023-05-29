@@ -1,45 +1,85 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "../styles/search.module.css"
 import { useEffect } from "react";
-import { getMoviesByGenres, getMovieByImdbid } from "../actions";
+import { getMoviesByGenres, getMovieByImdbid, getSeriesByGenres, getSerieByImdbid } from "../actions";
 
 export default function Search() {
     const dispatch = useDispatch();
     const movie = useSelector((state: any) => state.movies[0]);
-    useEffect(()=>{
-        dispatch(getMoviesByGenres(movie.genre) as any);
-    }, [])
+    const serie = useSelector((state: any) => state.series[0]);
+    const searchType = useSelector((state: any) => state.searchType);
+    useEffect(() => {
+        if (searchType === "movies") {
+            dispatch(getMoviesByGenres(movie.genre) as any);
+        } else if (searchType === "series") {
+            dispatch(getSeriesByGenres(serie.genre) as any);
+        }
+    }, []);
+
     const relatedMovies = useSelector((state: any) => state.relatedMovies);
-    const handleSearchImdbid = (imdbid: string) => {
-        dispatch(getMovieByImdbid(imdbid) as any);
+    const relatedSeries = useSelector((state: any) => state.relatedSeries);
+
+    const handleSearchImdbid = (imdbid: string, type: "series" | "movies") => {
+        if (type === "movies") {
+            dispatch(getMovieByImdbid(imdbid) as any);
+        } else if (type === "series") {
+            dispatch(getSerieByImdbid(imdbid) as any);
+        }
+
     }
+
     return (
         <div className={styles.searchCont}>
             <section className={styles.poster}>
-                <img src={movie ? movie.poster : "/belgian-g807cf7783_1280.png"} className={styles.img}/>
+                <img src={movie ? movie.poster : "/belgian-g807cf7783_1280.png"} className={styles.img} />
             </section>
             <section className={styles.info}>
-                <h1 className={styles.title}>{movie ? movie.title : "N/A"}</h1>
-                <p className={styles.description}>
-                    {movie ? movie.plot : "N/A"}
-                </p>
-                <h3 className={styles.h3Data}>{movie ? movie.released : "N/A"}</h3>
-                <h4 className={styles.h4Data}>Director: <a>{movie ? movie.director : "N/A"}</a></h4>
-                <h4 className={styles.h4Data}>Writer: <a>{movie ? movie.writer : "N/A"}</a></h4>
-                <h4 className={styles.h4Data}>Actors: <a>{movie ? movie.actors : "N/A"}</a></h4>
-                <h4 className={styles.h4Data}>Genres: <a>{movie ? movie.genre : "N/A"}</a></h4>
-                <h4 className={styles.h4Data}>Rated: <a>{movie ? movie.rated : "N/A"}</a></h4>
+                {searchType === "movies" && <>
+                    <h1 className={styles.title}>{movie ? movie.title : "N/A"}</h1>
+                    <p className={styles.description}>
+                        {movie ? movie.plot : "N/A"}
+                    </p>
+                    <h3 className={styles.h3Data}>Movie {movie ? "of " + movie.year : ""}</h3>
+                    <h4 className={styles.h4Data}>Director: <a>{movie ? movie.director : "N/A"}</a></h4>
+                    <h4 className={styles.h4Data}>Writer: <a>{movie ? movie.writer : "N/A"}</a></h4>
+                    <h4 className={styles.h4Data}>Actors: <a>{movie ? movie.actors : "N/A"}</a></h4>
+                    <h4 className={styles.h4Data}>Genres: <a>{movie ? movie.genre : "N/A"}</a></h4>
+                    <h4 className={styles.h4Data}>Rated: <a>{movie ? movie.rated : "N/A"}</a></h4>
+                </>}
+                {searchType === "series" && <>
+                    <h1 className={styles.title}>{serie ? serie.title : "N/A"}</h1>
+                    <p className={styles.description}>
+                        {serie ? serie.plot : "N/A"}
+                    </p>
+                    <h3 className={styles.h3Data}>Serie {serie ? "of " + serie.year : ""}</h3>
+                    <h4 className={styles.h4Data}>Director: <a>{serie ? serie.director : "N/A"}</a></h4>
+                    <h4 className={styles.h4Data}>Writer: <a>{serie ? serie.writer : "N/A"}</a></h4>
+                    <h4 className={styles.h4Data}>Actors: <a>{serie ? serie.actors : "N/A"}</a></h4>
+                    <h4 className={styles.h4Data}>Genres: <a>{serie ? serie.genre : "N/A"}</a></h4>
+                    <h4 className={styles.h4Data}>Rated: <a>{serie ? serie.rated : "N/A"}</a></h4>
+                </>}
             </section>
             <section className={styles.relatedMovies}>
                 <h1 className={styles.relatedTitle}>Peliculas Relacionadas</h1>
                 <ul className={styles.moviesList}>
-                {relatedMovies.map((movie: any, count: number) => {
-                        if (count<50 && movie.poster !== "N/A") {
+                    {searchType === "movies" ? relatedMovies.map((movie: any, count: number) => {
+                        if (count < 50 && movie.poster !== "N/A") {
                             return (
-                                <li className={styles.movie} key={movie.imdbid} onClick={()=>handleSearchImdbid(movie.imdbid)}>
-                                    <img src={movie.poster} className={styles.moviePoster}/>
+                                <li className={styles.movie} key={"m" + movie.imdbid + count} onClick={() => handleSearchImdbid(movie.imdbid, "movies")}>
+                                    <img src={movie.poster} className={styles.moviePoster} />
                                     <p>
                                         {movie.title}
+                                    </p>
+                                </li>
+                            )
+                        }
+                    }) : relatedSeries.map((serie: any, count: number) => {
+                        if (count < 50 && serie.poster !== "N/A") {
+                            return (
+                                <li className={styles.serie} key={"s" + serie.imdbid + count} onClick={() => handleSearchImdbid(serie.imdbid, "series")}>
+                                    <img src={serie.poster} className={styles.seriePoster} />
+                                    <p>
+                                        {serie.title}
                                     </p>
                                 </li>
                             )

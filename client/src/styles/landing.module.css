@@ -47,13 +47,28 @@
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
-    width: 37vw;
+    width: 30vw;
     height: 5vh;
     background-color: white;
     border-radius: 8px;
     border-style: none;
     color: black;
     padding: 0 1vw;
+}
+
+.selectType{
+    width: 8vw;
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    border-style: none;
+    font-family: Raleway;
+    margin: 0 0 0 1vw;
+    background-color: rgba(190,19,29, 0.9);
+    font-size: 1em;
 }
 
 .searchButton{
@@ -65,7 +80,7 @@
     height: 5vh;
     cursor: pointer;
     background-color: rgba(190,19,29, 0.9);
-    margin: 0 0 0 3vw;
+    margin: 0 0 0 1vw;
     border-radius: 8px;
     color: white;
     font-family: Raleway;
@@ -87,14 +102,18 @@
     width: 100vw;
 }
 
-.allTitle{
+.allMoviesTitle, .allSeriesTitle{
     width: 60vw;
     height: 10vh;
     font-size: 3em;
     margin: 0 0 10vh 0;
 }
 
-.moviesList{
+.allSeriesTitle{
+    margin-top: 10vh;
+}
+
+.moviesList, .seriesList{
     width: 100vw;
     display: flex;
     flex-direction: row;
@@ -106,7 +125,7 @@
     margin: 0;
 }
 
-.movie{
+.movie, .serie{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -117,7 +136,7 @@
     cursor: pointer;
 }
 
-.moviePoster{
+.moviePoster, .seriePoster{
     display: flex;
     justify-content: center;
     align-items: center;

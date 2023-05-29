@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { SeriesService } from './series.service';
 
 @Controller('series')
@@ -12,6 +12,11 @@ export class SeriesController {
     @Get("all")
     getAllSeries(){
         return this.serieServices.getAllSeries();
+    }
+
+    @Get("genres")
+    getMoviesByGenre(@Query("g") genres: any){
+        return this.serieServices.getSeriesByGenre(genres.split(", "));
     }
 
     @Get("serie/:imdbid")

@@ -8,6 +8,7 @@ import {
     //GoogleAuthProvider,
     //signOut,
     signInWithEmailAndPassword,
+    signOut
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -37,15 +38,44 @@ export function getMovieByName(name: string): ThunkAction<Promise<void>, any, an
     }
 }
 
+export function getSerieByName(name: string): ThunkAction<Promise<void>, any, any, AnyAction> {
+    return async (dispatch: Dispatch) => {
+        try {
+            let json = await axios.get("http://localhost:3000/series/all/" + name);
+            console.log(json);
+            dispatch({
+                type: "GET_SERIE_BY_NAME",
+                payload: json.data
+            })
+        } catch (e) {
+            throw new Error("Error")
+        }
+    }
+}
+
 export function getMovieByImdbid(imdbid: string): ThunkAction<Promise<void>, any, any, AnyAction> {
     return async (dispatch: Dispatch) => {
-        try{
+        try {
             let json = await axios.get("http://localhost:3000/movies/movie/" + imdbid);
             dispatch({
                 type: "GET_MOVIE_BY_IMDBID",
                 payload: json.data
             })
-        }catch(e: any){
+        } catch (e: any) {
+            throw new Error("Error")
+        }
+    }
+}
+
+export function getSerieByImdbid(imdbid: string): ThunkAction<Promise<void>, any, any, AnyAction> {
+    return async (dispatch: Dispatch) => {
+        try {
+            let json = await axios.get("http://localhost:3000/series/serie/" + imdbid);
+            dispatch({
+                type: "GET_SERIE_BY_IMDBID",
+                payload: json.data
+            })
+        } catch (e: any) {
             throw new Error("Error")
         }
     }
@@ -53,13 +83,27 @@ export function getMovieByImdbid(imdbid: string): ThunkAction<Promise<void>, any
 
 export function getAllMovies(): ThunkAction<Promise<void>, any, any, AnyAction> {
     return async (dispatch: Dispatch) => {
-        try{
+        try {
             let json = await axios.get("http://localhost:3000/movies/all");
             dispatch({
                 type: "GET_ALL_MOVIES",
                 payload: json.data
             })
-        }catch(e) {
+        } catch (e) {
+            throw new Error("Error")
+        }
+    }
+}
+
+export function getAllSeries(): ThunkAction<Promise<void>, any, any, AnyAction> {
+    return async (dispatch: Dispatch) => {
+        try {
+            let json = await axios.get("http://localhost:3000/series/all");
+            dispatch({
+                type: "GET_ALL_SERIES",
+                payload: json.data
+            })
+        } catch (e) {
             throw new Error("Error")
         }
     }
@@ -67,13 +111,40 @@ export function getAllMovies(): ThunkAction<Promise<void>, any, any, AnyAction> 
 
 export function getMoviesByGenres(genres: string): ThunkAction<Promise<void>, any, any, AnyAction> {
     return async (dispatch: Dispatch) => {
-        try{
-            let json = await axios.get("http://localhost:3000/movies/genres?g="+genres);
+        try {
+            let json = await axios.get("http://localhost:3000/movies/genres?g=" + genres);
             dispatch({
                 type: "GET_MOVIES_BY_GENRE",
                 payload: json.data
             })
-        }catch(e){
+        } catch (e) {
+            throw new Error("Error")
+        }
+    }
+}
+
+export function getSeriesByGenres(genres: string): ThunkAction<Promise<void>, any, any, AnyAction> {
+    return async (dispatch: Dispatch) => {
+        try {
+            let json = await axios.get("http://localhost:3000/series/genres?g=" + genres);
+            dispatch({
+                type: "GET_SERIES_BY_GENRE",
+                payload: json.data
+            })
+        } catch (e) {
+            throw new Error("Error")
+        }
+    }
+}
+
+export function setSearchType(type: string): ThunkAction<Promise<void>, any, any, AnyAction> {
+    return async (dispatch: Dispatch) => {
+        try {
+            dispatch({
+                type: "SET_SEARCH_TYPE",
+                payload: type
+            })
+        } catch (e) {
             throw new Error("Error")
         }
     }
@@ -106,7 +177,23 @@ export function SignUpUser(data: any): ThunkAction<Promise<void>, any, any, AnyA
         try {
             await axios.post("http://localhost:3000/users/create/", data);
             dispatch({
-                type: "SIGN_UP_USER"
+                type: "SIGN_UP_USER",
+                payload: data
+            })
+        } catch (e) {
+            throw new Error("Error")
+        }
+    }
+}
+
+export function SignOutUser(): ThunkAction<Promise<void>, any, any, AnyAction> {
+    return async (dispatch: Dispatch) => {
+        try {
+            await signOut(
+                auth
+            );
+            dispatch({
+                type: "LOG_OUT_USER"
             })
         } catch (e) {
             throw new Error("Error")

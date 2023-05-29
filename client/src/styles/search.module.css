@@ -95,7 +95,7 @@
     margin: 0;
 }
 
-.movie{
+.movie, .serie{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -106,7 +106,7 @@
     cursor: pointer;
 }
 
-.moviePoster{
+.moviePoster, .seriePoster{
     display: flex;
     justify-content: center;
     align-items: center;
