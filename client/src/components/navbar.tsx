@@ -1,26 +1,41 @@
 import styles from "../styles/navbar.module.css";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { getMovieByName } from "../actions";
+import { useDispatch, useSelector } from "react-redux";
+import { getMovieByName, signOutUser } from "../actions";
+import { useState } from "react";
 
-export default function Navbar(){
+export default function Navbar() {
+    const [loggedMenu, setLoggedMenu] = useState(false);
     const { register, handleSubmit, /*formState: { errors }*/ } = useForm();
     const Navigate = useNavigate();
     const dispatch = useDispatch();
+    const userStatus = useSelector((state: any) => state.userStatus);
+
     const handleSearchName = (data: any) => {
         dispatch(getMovieByName(data.name) as any);
         Navigate("/search");
     }
-    return(
+
+    const handleUserLogin = () => {
+        setLoggedMenu(false);
+        dispatch(signOutUser() as any);
+    }
+    return (
         <nav className={styles.navbar}>
-            <a className={styles.logo} href="/"/>
+            <a className={styles.logo} href="/" />
             <p className={styles.title}>FlickVerse</p>
             <form className={styles.search} onSubmit={handleSubmit(handleSearchName)}>
-                <input type="text" className={styles.inputField} {...register("name", { required: true })}/>
-                <input type="submit" value=" " className={styles.inputSubmit}/>
+                <input type="text" className={styles.inputField} {...register("name", { required: true })} />
+                <input type="submit" value=" " className={styles.inputSubmit} />
             </form>
-            <button className={styles.loginButton} onClick={()=>Navigate("/login")}>Iniciar Sesión</button>
+            {userStatus === "notLogged" && <button className={styles.loginButton} onClick={() => Navigate("/login")}>Iniciar Sesión</button>}
+            {userStatus === "logged" && <button className={styles.loggedImg} onClick={()=>setLoggedMenu(!loggedMenu)}/>}
+            {loggedMenu && <ul className={styles.loggedMenu}>
+                <li className={styles.loggedOption}>Favorites</li>
+                <li className={styles.loggedOption}>Ratings</li>
+                <li className={styles.loggedOption} onClick={()=>handleUserLogin()}>Sign Out</li>    
+            </ul>}
         </nav>
     )
 }

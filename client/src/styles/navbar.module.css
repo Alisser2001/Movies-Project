@@ -90,9 +90,53 @@
     cursor: pointer;
 }
 
+.loggedImg{
+    width: 6vw;
+    height: 6vh;
+    margin: 5vh 4vw;
+    background-color: transparent;
+    border-style: none;
+    background-image: url("user-circle.png");
+    background-repeat: no-repeat;
+    background-size: 3vw 6vh;
+    transform: scale(1.5);
+    cursor: pointer;
+}
+
 .loginButton:hover{
     font-size: 1em;
     transform: scale(0.97);
+    background-color: rgba(190,19,29, 1);
+}
+
+.loggedMenu{
+    position: absolute;
+    left: 87vw;
+    top: 12vh;
+    list-style: none;
+    width: 8vw;
+    background-color: transparent;
+    height: 12vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.loggedOption{
+    display: flex;
+    flex-direction: row;
+    min-width: 8vw;
+    height: 4vh;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(190,19,29, 0.9);
+    cursor: pointer;
+}
+
+.loggedOption:hover{
     background-color: rgba(190,19,29, 1);
 }
 

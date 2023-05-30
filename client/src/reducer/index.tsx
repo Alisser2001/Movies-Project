@@ -13,8 +13,7 @@ interface AppState {
     favMovies: [],
     favSeries: [],
     userComments: [],
-    userRatings: [],
-    profileImg: string
+    userRatings: []
 }
 
 const initialState: AppState = {
@@ -30,8 +29,7 @@ const initialState: AppState = {
     favMovies: [],
     favSeries: [],
     userComments: [],
-    userRatings: [],
-    profileImg: ""
+    userRatings: []
 }
 
 const rootReducer: Reducer<AppState, any> = (state = initialState, action: any) => {
@@ -94,7 +92,7 @@ const rootReducer: Reducer<AppState, any> = (state = initialState, action: any) 
                 username: action.payload.username,
                 email: action.payload.email
             }
-        case "LOG_OUT_USER":
+        case "SIGN_OUT_USER":
             return {
                 ...state,
                 userStatus: "notLogged",

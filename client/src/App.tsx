@@ -3,6 +3,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Navbar from './components/navbar';
 import LandingPage from './components/landing';
 import Search from './components/search';
+import Results from './components/results';
 import LogIn from './components/login';
 import SignUp from './components/signup';
 //import axios from 'axios';
@@ -16,7 +17,8 @@ function App() {
         <Navbar/>
         <Routes>
           <Route path="/" element={<LandingPage/>}/>
-          <Route path="/search" element={<Search/>}/>
+          <Route path="/search/:imdbid" element={<Search/>}/>
+          <Route path="/results" element={<Results/>}/>
           <Route path="/login" element={<LogIn/>}/>
           <Route path="/signup" element={<SignUp/>}/>
         </Routes>

@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "../styles/search.module.css"
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { getMoviesByGenres, getMovieByImdbid, getSeriesByGenres, getSerieByImdbid } from "../actions";
 
 export default function Search() {
+    const Navigate = useNavigate();
     const dispatch = useDispatch();
     const movie = useSelector((state: any) => state.movies[0]);
     const serie = useSelector((state: any) => state.series[0]);
@@ -14,7 +16,7 @@ export default function Search() {
         } else if (searchType === "series") {
             dispatch(getSeriesByGenres(serie.genre) as any);
         }
-    }, []);
+    }, [movie, serie]);
 
     const relatedMovies = useSelector((state: any) => state.relatedMovies);
     const relatedSeries = useSelector((state: any) => state.relatedSeries);
@@ -22,16 +24,18 @@ export default function Search() {
     const handleSearchImdbid = (imdbid: string, type: "series" | "movies") => {
         if (type === "movies") {
             dispatch(getMovieByImdbid(imdbid) as any);
+            Navigate(`/search/id=${imdbid}`);
         } else if (type === "series") {
             dispatch(getSerieByImdbid(imdbid) as any);
+            Navigate(`/search/id=${imdbid}`);
         }
-
     }
 
     return (
         <div className={styles.searchCont}>
             <section className={styles.poster}>
-                <img src={movie ? movie.poster : "/belgian-g807cf7783_1280.png"} className={styles.img} />
+                {searchType === "movies" && <img src={movie ? movie.poster : "/belgian-g807cf7783_1280.png"} className={styles.img} />}
+                {searchType === "series" && <img src={serie ? serie.poster : "/belgian-g807cf7783_1280.png"} className={styles.img} />}
             </section>
             <section className={styles.info}>
                 {searchType === "movies" && <>
@@ -60,9 +64,9 @@ export default function Search() {
                 </>}
             </section>
             <section className={styles.relatedMovies}>
-                <h1 className={styles.relatedTitle}>Peliculas Relacionadas</h1>
+                <h1 className={styles.relatedTitle}>{searchType === "movies" ? "Peliculas" : "Series"} Relacionadas</h1>
                 <ul className={styles.moviesList}>
-                    {searchType === "movies" ? relatedMovies.map((movie: any, count: number) => {
+                    {searchType === "movies" && relatedMovies.map((movie: any, count: number) => {
                         if (count < 50 && movie.poster !== "N/A") {
                             return (
                                 <li className={styles.movie} key={"m" + movie.imdbid + count} onClick={() => handleSearchImdbid(movie.imdbid, "movies")}>
@@ -73,7 +77,8 @@ export default function Search() {
                                 </li>
                             )
                         }
-                    }) : relatedSeries.map((serie: any, count: number) => {
+                    })} 
+                    {searchType === "series" && relatedSeries.map((serie: any, count: number) => {
                         if (count < 50 && serie.poster !== "N/A") {
                             return (
                                 <li className={styles.serie} key={"s" + serie.imdbid + count} onClick={() => handleSearchImdbid(serie.imdbid, "series")}>

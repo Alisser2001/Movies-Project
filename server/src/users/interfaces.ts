@@ -1,3 +1,4 @@
+import { UUID } from "crypto";
 import { Movies } from "src/movies/movies.entity";
 import { Series } from "src/series/series.entity";
 
@@ -10,9 +11,17 @@ export interface Comments {
 }
 
 export interface Ratings {
-    rating: string,
+    rating: number,
     type: "movie" | "serie",
     imdbid: string,
     name: string,
     poster: string
+}
+
+export interface User {
+    uid: UUID
+    name: string;
+    lastname: string;
+    username: string;
+    email: string;
 }

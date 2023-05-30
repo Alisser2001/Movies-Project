@@ -3,6 +3,7 @@ import { Movies } from 'src/movies/movies.entity';
 import { Series } from 'src/series/series.entity';
 import { Entity, Column, PrimaryColumn, ManyToMany, JoinTable } from 'typeorm';
 import { Comments } from './interfaces';
+import { Ratings } from './interfaces';
 
 @Entity()
 export class Users {
@@ -21,8 +22,8 @@ export class Users {
     @Column()
     email: string;
 
-    @Column({nullable: true})
-    ratings: string;
+    @Column({type: 'jsonb', nullable: true})
+    ratings: Ratings[];
 
     @ManyToMany(()=> Movies, (movie)=> movie.fans)
     @JoinTable()

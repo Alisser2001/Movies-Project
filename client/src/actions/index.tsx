@@ -186,14 +186,14 @@ export function SignUpUser(data: any): ThunkAction<Promise<void>, any, any, AnyA
     }
 }
 
-export function SignOutUser(): ThunkAction<Promise<void>, any, any, AnyAction> {
+export function signOutUser(): ThunkAction<Promise<void>, any, any, AnyAction> {
     return async (dispatch: Dispatch) => {
         try {
             await signOut(
                 auth
             );
             dispatch({
-                type: "LOG_OUT_USER"
+                type: "SIGN_OUT_USER"
             })
         } catch (e) {
             throw new Error("Error")

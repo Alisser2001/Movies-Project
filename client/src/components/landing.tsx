@@ -31,22 +31,24 @@ export default function LandingPage() {
         if (data.type === "movies") {
             dispatch(getMovieByName(data.name) as any);
             dispatch(setSearchType("movies") as any);
-            Navigate("/search");
+            Navigate("/results");
         } else if (data.type === "series") {
             dispatch(getSerieByName(data.name) as any);
             dispatch(setSearchType("series") as any);
-            Navigate("/search");
+            Navigate("/results");
         }
     }
 
     const handleSearchMovieByImdbid = (imdbid: string) => {
         dispatch(getMovieByImdbid(imdbid) as any);
-        Navigate("/search");
+        dispatch(setSearchType("movies") as any);
+        Navigate(`/search/${imdbid}`);
     }
 
     const handleSearchSerieByImdbid = (imdbid: string) => {
         dispatch(getSerieByImdbid(imdbid) as any);
-        Navigate("/search");
+        dispatch(setSearchType("series") as any);
+        Navigate(`/search/${imdbid}`);
     }
 
     return (

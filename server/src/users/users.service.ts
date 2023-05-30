@@ -11,6 +11,8 @@ import {
     createUserWithEmailAndPassword,
     updateProfile
 } from "firebase/auth";
+import { User } from './interfaces';
+import { UUID } from 'crypto';
 
 const firebaseConfig = {
     apiKey: "AIzaSyChmubKNWq-XJd-ERD2v8R-HrPikLFJrsA",
@@ -39,7 +41,7 @@ export class UsersService {
         const userExists = this.usersRepo.findOne({ where: { email: email } });
         if (user && userExists) {
             this.createUser({
-                uid: user.uid,
+                uid: user.uid as UUID,
                 name: name,
                 lastname: lastname,
                 username: username,
@@ -52,7 +54,7 @@ export class UsersService {
         return "El usuario fue creado con éxito";
     }
 
-    async createUser(body: any) {
+    async createUser(body: User) {
         try {
             const newUser = this.usersRepo.create();
             newUser.id = body.uid;
