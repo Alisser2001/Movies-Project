@@ -125,6 +125,16 @@
     padding: 0;
 }
 
+.username{
+    display: flex;
+    flex-direction: row;
+    min-width: 8vw;
+    height: 4vh;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0, 0.9);
+}
+
 .loggedOption{
     display: flex;
     flex-direction: row;

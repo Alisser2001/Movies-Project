@@ -53,7 +53,7 @@ export default function Search() {
                     <section className={styles.rating}>
                         {userStatus === "logged" ? 
                         <button className={styles.ratingButton} onClick={()=>Navigate(`/rating/${movie.imdbid}`)}>Calificar</button> :
-                        <p>Inicia sesión y crea tu reseña</p>}
+                        <p className={styles.signUpLink}><a href="/login">Inicia sesión</a> y crea tu reseña</p>}
                     </section>
                 </>}
                 {searchType === "series" && <>
@@ -70,7 +70,7 @@ export default function Search() {
                     <section className={styles.rating}>
                         {userStatus === "logged" ? 
                         <button className={styles.ratingButton} onClick={()=>Navigate(`/rating/${serie.imdbid}`)}>Calificar</button>:
-                        <p>Inicia sesión y crea tu reseña</p>}
+                        <p><a href="/login">Inicia sesión</a> y crea tu reseña</p>}
                     </section>
                 </>}
             </section>

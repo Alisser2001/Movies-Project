@@ -160,3 +160,9 @@
     height: 40vh;
     max-height: 40vh;
 }
+
+.signUpLink>a:hover{
+    cursor: pointer;
+    color: rgba(190,19,29, 1);
+    text-decoration: underline;
+}

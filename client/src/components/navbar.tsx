@@ -11,6 +11,7 @@ export default function Navbar() {
     const Navigate = useNavigate();
     const dispatch = useDispatch();
     const userStatus = useSelector((state: any) => state.userStatus);
+    const username = useSelector((state: any) => state.username);
 
     const handleSearchName = (data: any) => {
         dispatch(getMovieByName(data.name) as any);
@@ -33,6 +34,7 @@ export default function Navbar() {
             {userStatus === "notLogged" && <button className={styles.loginButton} onClick={() => Navigate("/login")}>Iniciar Sesión</button>}
             {userStatus === "logged" && <button className={styles.loggedImg} onClick={()=>setLoggedMenu(!loggedMenu)}/>}
             {loggedMenu && <ul className={styles.loggedMenu}>
+                <li className={styles.username}>User: {username}</li>
                 <li className={styles.loggedOption} onClick={()=>Navigate("/userRatings")}>Ratings</li>
                 <li className={styles.loggedOption} onClick={()=>handleUserLogin()}>Sign Out</li>    
             </ul>}
