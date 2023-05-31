@@ -1,8 +1,8 @@
 # Movies-Project
 
-# Client
+## Client
 
-## Estructura .env:
+### Estructura .env:
   VITE_FIREBASE_CONFIG = {
     apiKey: "",
     authDomain: "",
@@ -13,12 +13,12 @@
     measurementId: ""
   }
  
- ## Iniciar proyecto: 
+ ### Iniciar proyecto: 
   "npm run dev"
 
-# Server
+## Server
 
-## Estructura .dev.env:
+### Estructura .dev.env:
   API_KEY = ""
 
   FIREBASE_CONFIG = {
@@ -31,5 +31,5 @@
       measurementId: ""
   }
  
- # Iniciar proyecto: 
+ ## Iniciar proyecto: 
   "npm run start:dev"
