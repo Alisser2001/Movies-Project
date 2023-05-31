@@ -1,6 +1,6 @@
 # Movies-Project
 
-#Client
+# Client
 
 Estructura .env:
   VITE_FIREBASE_CONFIG = {
@@ -16,7 +16,7 @@ Estructura .env:
  Iniciar proyecto: 
   "npm run dev"
 
-#Server
+# Server
 
 Estructura .dev.env:
   API_KEY = ""
