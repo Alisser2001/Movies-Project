@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Users } from './users.entity';
 import { Repository } from 'typeorm';
 import { initializeApp } from "firebase/app";
+import { ConfigService } from '@nestjs/config';
 import {
     getAuth,
     //signInWithPopup,
@@ -17,44 +18,36 @@ import { Movies } from 'src/movies/movies.entity';
 import { Series } from 'src/series/series.entity';
 import { Comments } from './interfaces';
 
-const firebaseConfig = {
-    apiKey: "AIzaSyChmubKNWq-XJd-ERD2v8R-HrPikLFJrsA",
-    authDomain: "movies-5cf97.firebaseapp.com",
-    projectId: "movies-5cf97",
-    storageBucket: "movies-5cf97.appspot.com",
-    messagingSenderId: "659474995814",
-    appId: "1:659474995814:web:1078ff79f80a6b7e21eba7",
-    measurementId: "G-006ZEGNNHM"
-};
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
 @Injectable()
 export class UsersService {
     constructor(
         @InjectRepository(Users) private usersRepo: Repository<Users>,
         @InjectRepository(Movies) private moviesRepo: Repository<Movies>,
-        @InjectRepository(Series) private seriesRepo: Repository<Series>
+        @InjectRepository(Series) private seriesRepo: Repository<Series>,
+        private readonly configService: ConfigService
     ) { }
 
-    async getUser(uid: string){
-        try{
+    async getUser(uid: string) {
+        try {
             const user = this.usersRepo.findOne({
                 where: {
                     id: uid as UUID
                 },
                 relations: ["favoritesmovies", "favoritesseries"]
             });
-            if(user){
+            if (user) {
                 return user
             } else {
                 throw new Error("Usuario no encontrado");
             }
-        }catch(e){
+        } catch (e) {
             throw new Error(e);
         }
     }
     async signUpUser(name: string, lastname: string, username: string, email: string, password: string) {
+        const firebaseConfig = this.configService.get("FIREBASE_CONFIG");
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
         let userCredential = await createUserWithEmailAndPassword(
             auth,
             email,

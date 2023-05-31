@@ -11,15 +11,7 @@ import {
     signOut
 } from "firebase/auth";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyChmubKNWq-XJd-ERD2v8R-HrPikLFJrsA",
-    authDomain: "movies-5cf97.firebaseapp.com",
-    projectId: "movies-5cf97",
-    storageBucket: "movies-5cf97.appspot.com",
-    messagingSenderId: "659474995814",
-    appId: "1:659474995814:web:1078ff79f80a6b7e21eba7",
-    measurementId: "G-006ZEGNNHM"
-};
+const firebaseConfig = JSON.parse(import.meta.env.VITE_FIREBASE_CONFIG);
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
