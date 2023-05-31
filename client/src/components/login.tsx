@@ -2,14 +2,17 @@ import styles from "../styles/login.module.css";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { LogInUser } from "../actions";
+import { useNavigate } from "react-router-dom";
 import { emailValidator, passwordValidator } from "../validators/validator";
 
 export default function LogIn(){
+    const Navigate = useNavigate();
     const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
 
     const handleSubmitUser = (data: any) => {
         dispatch(LogInUser(data) as any);
+        Navigate("/");
     }
 
     return(

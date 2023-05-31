@@ -160,10 +160,11 @@ export function LogInUser(data: any): ThunkAction<Promise<void>, any, any, AnyAc
                 password
             );
             const user = userCredential.user;
+            const json = await axios.get(`http://localhost:3000/users/get/${user.uid}`);
             if (userCredential !== null) {
                 dispatch({
                     type: "LOG_IN_USER",
-                    payload: user
+                    payload: json.data
                 })
             }
         } catch (e) {
@@ -177,8 +178,7 @@ export function SignUpUser(data: any): ThunkAction<Promise<void>, any, any, AnyA
         try {
             await axios.post("http://localhost:3000/users/create/", data);
             dispatch({
-                type: "SIGN_UP_USER",
-                payload: data
+                type: "SIGN_UP_USER"
             })
         } catch (e) {
             throw new Error("Error")
@@ -196,6 +196,90 @@ export function signOutUser(): ThunkAction<Promise<void>, any, any, AnyAction> {
                 type: "SIGN_OUT_USER"
             })
         } catch (e) {
+            throw new Error("Error")
+        }
+    }
+}
+
+export function newFavoriteMovie(data: any): ThunkAction<Promise<void>, any, any, AnyAction> {
+    return async (dispatch: Dispatch) => {
+        try{
+            let favMovies = await axios.post("http://localhost:3000/users/movies/favorites/add", data);
+            dispatch({
+                type: "NEW_FAV_MOVIE",
+                payload: favMovies.data
+            })
+        }catch(e) {
+            throw new Error("Error")
+        }
+    }
+}
+
+export function newFavoriteSerie(data: any): ThunkAction<Promise<void>, any, any, AnyAction> {
+    return async (dispatch: Dispatch) => {
+        try{
+            let favSeries = await axios.post("http://localhost:3000/users/series/favorites/add", data);
+            dispatch({
+                type: "NEW_FAV_SERIE",
+                payload: favSeries.data
+            })
+        }catch(e) {
+            throw new Error("Error")
+        }
+    }
+}
+
+export function removeFavoriteMovie(data: any): ThunkAction<Promise<void>, any, any, AnyAction> {
+    return async (dispatch: Dispatch) => {
+        try{
+            let favMovies = await axios.post("http://localhost:3000/users/movies/favorites/remove", data);
+            dispatch({
+                type: "REMOVE_FAV_MOVIE",
+                payload: favMovies.data
+            })
+        }catch(e) {
+            throw new Error("Error")
+        }
+    }
+}
+
+export function removeFavoriteSerie(data: any): ThunkAction<Promise<void>, any, any, AnyAction> {
+    return async (dispatch: Dispatch) => {
+        try{
+            let favSeries = await axios.post("http://localhost:3000/users/series/favorites/remove", data);
+            dispatch({
+                type: "REMOVE_FAV_SERIE",
+                payload: favSeries.data
+            })
+        }catch(e) {
+            throw new Error("Error")
+        }
+    }
+}
+
+export function newRating(data: any): ThunkAction<Promise<void>, any, any, AnyAction> {
+    return async (dispatch: Dispatch) => {
+        try{
+            let ratings = await axios.post("http://localhost:3000/users/ratings/add", data);
+            dispatch({
+                type: "NEW_RATING",
+                payload: ratings.data
+            })
+        }catch(e){
+            throw new Error("Error")
+        }
+    }
+}
+
+export function newComment(data: any): ThunkAction<Promise<void>, any, any, AnyAction> {
+    return async (dispatch: Dispatch) => {
+        try{
+            let comments = await axios.post("http://localhost:3000/users/comments/add", data);
+            dispatch({
+                type: "NEW_COMMENT",
+                payload: comments.data
+            })
+        }catch(e){
             throw new Error("Error")
         }
     }

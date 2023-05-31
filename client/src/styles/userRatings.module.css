@@ -1,0 +1,122 @@
+.uRatingsCont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+}
+
+.ratingList{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70vw;
+    margin: 2vh 0 0 0;
+    padding: 0;
+}
+
+.rateItem{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 60vw;
+    height: 10vh;
+    margin: 0 0 5vh 0;
+    padding: 5px;
+    border-radius: 8px;
+    background-color: rgba(0,0,0,0.9);
+}
+
+.type{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 5vw;
+    margin: 0;
+    padding: 0;
+}
+
+.name{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 20vw;
+    margin: 0 3vw 0 0;
+    padding: 0;
+}
+
+.startList{
+    display: flex;
+    flex-direction: row;
+    margin: 0 3vw 0 0;
+}
+
+.rateStar{
+    width: 3vw;
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-image: url("/star.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 3vw 5vh;
+    margin: 0;
+}
+
+.rateStarFill{
+    width: 3vw;
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-image: url("/star-filled.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 3vw 5vh;
+    margin: 0;
+}
+
+.favButton{
+    width: 5vw;
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    background-color: transparent;
+    background-image: url("/heart.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    border-style: none;
+    background-size: 3vw 5vh;
+    margin: 0 3vw 0 0;
+}
+
+.favButtonFill{
+    width: 5vw;
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    background-color: transparent;
+    background-image: url("/heart-filled.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    border-style: none;
+    background-size: 3vw 5vh;
+    margin: 0 3vw 0 0;
+}
+
+.comment{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 37vw;
+    margin: 0 3vw 0 0;
+    padding: 0;
+}

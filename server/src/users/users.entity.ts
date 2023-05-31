@@ -7,6 +7,7 @@ import { Ratings } from './interfaces';
 
 @Entity()
 export class Users {
+
     @PrimaryColumn()
     id: UUID;
 
@@ -22,7 +23,7 @@ export class Users {
     @Column()
     email: string;
 
-    @Column({type: 'jsonb', nullable: true})
+    @Column({type: 'jsonb', nullable: true, default: [] })
     ratings: Ratings[];
 
     @ManyToMany(()=> Movies, (movie)=> movie.fans)
@@ -33,6 +34,6 @@ export class Users {
     @JoinTable()
     favoritesseries: Series[];
 
-    @Column({ type: 'jsonb', nullable: true })
+    @Column({ type: 'jsonb', nullable: true, default: [] })
     comments: Comments[];
 }

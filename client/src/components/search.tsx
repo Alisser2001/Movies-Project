@@ -10,6 +10,7 @@ export default function Search() {
     const movie = useSelector((state: any) => state.movies[0]);
     const serie = useSelector((state: any) => state.series[0]);
     const searchType = useSelector((state: any) => state.searchType);
+    const userStatus = useSelector((state: any) => state.userStatus);
     useEffect(() => {
         if (searchType === "movies") {
             dispatch(getMoviesByGenres(movie.genre) as any);
@@ -40,15 +41,20 @@ export default function Search() {
             <section className={styles.info}>
                 {searchType === "movies" && <>
                     <h1 className={styles.title}>{movie ? movie.title : "N/A"}</h1>
+                    <h3 className={styles.h3Data}>Movie {movie ? "of " + movie.year : ""}</h3>
                     <p className={styles.description}>
                         {movie ? movie.plot : "N/A"}
                     </p>
-                    <h3 className={styles.h3Data}>Movie {movie ? "of " + movie.year : ""}</h3>
                     <h4 className={styles.h4Data}>Director: <a>{movie ? movie.director : "N/A"}</a></h4>
                     <h4 className={styles.h4Data}>Writer: <a>{movie ? movie.writer : "N/A"}</a></h4>
                     <h4 className={styles.h4Data}>Actors: <a>{movie ? movie.actors : "N/A"}</a></h4>
                     <h4 className={styles.h4Data}>Genres: <a>{movie ? movie.genre : "N/A"}</a></h4>
                     <h4 className={styles.h4Data}>Rated: <a>{movie ? movie.rated : "N/A"}</a></h4>
+                    <section className={styles.rating}>
+                        {userStatus === "logged" ? 
+                        <button className={styles.ratingButton} onClick={()=>Navigate(`/rating/${movie.imdbid}`)}>Calificar</button> :
+                        <p>Inicia sesión y crea tu reseña</p>}
+                    </section>
                 </>}
                 {searchType === "series" && <>
                     <h1 className={styles.title}>{serie ? serie.title : "N/A"}</h1>
@@ -61,6 +67,11 @@ export default function Search() {
                     <h4 className={styles.h4Data}>Actors: <a>{serie ? serie.actors : "N/A"}</a></h4>
                     <h4 className={styles.h4Data}>Genres: <a>{serie ? serie.genre : "N/A"}</a></h4>
                     <h4 className={styles.h4Data}>Rated: <a>{serie ? serie.rated : "N/A"}</a></h4>
+                    <section className={styles.rating}>
+                        {userStatus === "logged" ? 
+                        <button className={styles.ratingButton} onClick={()=>Navigate(`/rating/${serie.imdbid}`)}>Calificar</button>:
+                        <p>Inicia sesión y crea tu reseña</p>}
+                    </section>
                 </>}
             </section>
             <section className={styles.relatedMovies}>
@@ -77,7 +88,7 @@ export default function Search() {
                                 </li>
                             )
                         }
-                    })} 
+                    })}
                     {searchType === "series" && relatedSeries.map((serie: any, count: number) => {
                         if (count < 50 && serie.poster !== "N/A") {
                             return (

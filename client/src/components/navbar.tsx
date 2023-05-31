@@ -14,12 +14,13 @@ export default function Navbar() {
 
     const handleSearchName = (data: any) => {
         dispatch(getMovieByName(data.name) as any);
-        Navigate("/search");
+        Navigate("/results");
     }
 
     const handleUserLogin = () => {
         setLoggedMenu(false);
         dispatch(signOutUser() as any);
+        Navigate("/");
     }
     return (
         <nav className={styles.navbar}>
@@ -32,8 +33,7 @@ export default function Navbar() {
             {userStatus === "notLogged" && <button className={styles.loginButton} onClick={() => Navigate("/login")}>Iniciar Sesión</button>}
             {userStatus === "logged" && <button className={styles.loggedImg} onClick={()=>setLoggedMenu(!loggedMenu)}/>}
             {loggedMenu && <ul className={styles.loggedMenu}>
-                <li className={styles.loggedOption}>Favorites</li>
-                <li className={styles.loggedOption}>Ratings</li>
+                <li className={styles.loggedOption} onClick={()=>Navigate("/userRatings")}>Ratings</li>
                 <li className={styles.loggedOption} onClick={()=>handleUserLogin()}>Sign Out</li>    
             </ul>}
         </nav>

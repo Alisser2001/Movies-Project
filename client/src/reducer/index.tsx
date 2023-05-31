@@ -7,6 +7,7 @@ interface AppState {
     relatedSeries: [],
     searchType: "movies" | "series",
     userStatus: "logged" | "notLogged",
+    uid: string,
     username: string,
     fullname: string,
     email: string,
@@ -23,6 +24,7 @@ const initialState: AppState = {
     relatedSeries: [],
     searchType: "movies",
     userStatus: "notLogged",
+    uid: "",
     username: "",
     fullname: "",
     email: "",
@@ -83,19 +85,24 @@ const rootReducer: Reducer<AppState, any> = (state = initialState, action: any) 
             return {
                 ...state,
                 userStatus: "logged",
-                email: action.payload.email
+                uid: action.payload.uid,
+                email: action.payload.email,
+                fullname: action.payload.name + " " + action.payload.lastname,
+                username: action.payload.username,
+                userRatings: action.payload.ratings,
+                userComments: action.payload.comments,
+                favMovies: action.payload.favoritesmovies,
+                favSeries: action.payload.favoritesseries
             }
         case "SIGN_UP_USER":
             return {
                 ...state,
-                fullname: action.payload.name + " " + action.payload.lastname,
-                username: action.payload.username,
-                email: action.payload.email
             }
         case "SIGN_OUT_USER":
             return {
                 ...state,
                 userStatus: "notLogged",
+                uid: "",
                 username: "",
                 fullname: "",
                 email: "",
@@ -104,6 +111,36 @@ const rootReducer: Reducer<AppState, any> = (state = initialState, action: any) 
                 userComments: [],
                 userRatings: [],
                 profileImg: ""
+            }
+        case "NEW_FAV_MOVIE":
+            return{
+                ...state,
+                favMovies: action.payload
+            }
+        case "NEW_FAV_SERIE":
+            return{
+                ...state,
+                favSerie: action.payload
+            }
+        case "REMOVE_FAV_MOVIE":
+            return{
+                ...state,
+                favMovies: action.payload
+            }
+        case "REMOVE_FAV_MOVIE":
+            return{
+                ...state,
+                favMovies: action.payload
+            }
+        case "NEW_RATING":
+            return{
+                ...state,
+                userRatings: action.payload
+            }
+        case "NEW_COMMENT":
+            return{
+                ...state,
+                userComments: action.payload
             }
         default:
             return state

@@ -1,0 +1,194 @@
+.ratingCont{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 84vh;
+}
+
+.poster {
+    display: flex;
+    flex-direction: row;
+    width: 20vw;
+    height: 60vh;
+    margin: 10vh 0 10vh 0;
+}
+
+.img{
+    display: flex;
+    flex-direction: row;
+    width: 20vw;
+    height: 60vh;
+}
+
+.rate{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40vw;
+    height: 60vh;
+    margin: 10vh 0 10vh 5vw;
+}
+
+.title {
+    width: 40vw;
+    height: 10vh;
+    margin: 0 0 2vh 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5em;
+}
+
+.labelRate{
+    width: 5vw;
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    margin: 0 2vw 0 0;
+}
+
+.rateList{
+    width: 35vw;
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    list-style: none;
+    margin: 0 0 2vh 0;
+}
+
+.rateStar{
+    width: 5vw;
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-image: url("/star.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 3vw 5vh;
+    margin: 0 0.5vw 0 0;
+    cursor: pointer;
+}
+
+.rateStarFill{
+    width: 5vw;
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-image: url("/star-filled.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 3vw 5vh;
+    margin: 0 0.5vw 0 0;
+    cursor: pointer;
+}
+
+.favCont{
+    width: 40vw;
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0 0 2vh 0;
+}
+
+.labelFav{
+    width: 15vw;
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    margin: 0 2vw 0 0;
+}
+
+.favButton{
+    width: 5vw;
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    background-color: transparent;
+    background-image: url("/heart.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    border-style: none;
+    background-size: 3vw 5vh;
+    cursor: pointer;
+}
+
+.favButtonFill{
+    width: 5vw;
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    background-color: transparent;
+    background-image: url("/heart-filled.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    border-style: none;
+    background-size: 3vw 5vh;
+    cursor: pointer;
+}
+
+.commentCont{
+    width: 40vw;
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0 0 3vh 0;
+}
+
+.labelComment{
+    width: 15vw;
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    margin: 0 2vw 1vh 0.7vw;
+}
+
+.textarea{
+    width: 35vw;
+    height: 14vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0.5vw;
+    margin: 0 0 0 3vw;
+    font-family: Raleway;
+}
+
+.submit{
+    width: 10vw;
+    height: 5vh;
+    background-color: rgba(190,19,29,0.9);
+    font-family: Raleway;
+    font-size: 1em;
+    border-radius: 8px;
+    border-style: none;
+    cursor: pointer;
+}
+
+.submit:hover{
+    background-color: rgba(190,19,29,1);
+}
