@@ -1,27 +1,13 @@
-# Movies-Project
+# Proyecto para ratings de películas
+## Curso: Técnicas de programación y laboratorio
+## Universidad de Antioquia
+### 2023
 
-## Client
+## Apartado del Cliente
 
-### Estructura .env:
-  VITE_FIREBASE_CONFIG = {
-    apiKey: "",
-    authDomain: "",
-    projectId: "",
-    storageBucket: "",
-    messagingSenderId: "",
-    appId: "",
-    measurementId: ""
-  }
- 
- ### Iniciar proyecto: 
-  "npm run dev"
+  ### Estructura del archivo .env:
 
-## Server
-
-### Estructura .dev.env:
-  API_KEY = ""
-
-  FIREBASE_CONFIG = {
+    VITE_FIREBASE_CONFIG = {
       apiKey: "",
       authDomain: "",
       projectId: "",
@@ -29,7 +15,28 @@
       messagingSenderId: "",
       appId: "",
       measurementId: ""
-  }
+    }
+    
+  ### Iniciar proyecto en desarrollo: 
  
- ## Iniciar proyecto: 
-  "npm run start:dev"
+    "npm run dev"
+
+## Apartado del Servidor
+
+  ### Estructura .dev.env:
+  
+    API_KEY = ""
+
+    FIREBASE_CONFIG = {
+        apiKey: "",
+        authDomain: "",
+        projectId: "",
+        storageBucket: "",
+        messagingSenderId: "",
+        appId: "",
+        measurementId: ""
+    }
+ 
+  ### Iniciar proyecto en desarrollo: 
+  
+    "npm run start:dev"
